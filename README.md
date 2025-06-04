@@ -216,19 +216,29 @@ Model ini dipilih sebagai solusi akhir karena memberikan performa paling seimban
 ### 1. Metrik yang Digunakan
 Untuk mengevaluasi performa model klasifikasi, digunakan metrik berikut:
 
-| Metrik           | Penjelasan Singkat                                                                                          | Rumus                                                                 |
-|------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| **Accuracy**     | Proporsi prediksi yang benar terhadap seluruh data.                                                          | ![Accuracy](https://latex.codecogs.com/svg.image?Accuracy%20%3D%20%5Cfrac%7BTC%20&plus;%20TN%7D%7BTC%20&plus;%20TN%20&plus;%20FP%20&plus;%20FN%7D) |
-| **Precision**    | Dari semua prediksi churn, berapa banyak yang benar-benar churn.                                             | ![Precision](https://latex.codecogs.com/svg.image?Precision%20%3D%20%5Cfrac%7BTC%7D%7BTC%20&plus;%20FP%7D) |
-| **Recall**       | Dari semua pelanggan yang churn, berapa banyak yang berhasil diprediksi.                                     | ![Recall](https://latex.codecogs.com/svg.image?Recall%20%3D%20%5Cfrac%7BTC%7D%7BTC%20&plus;%20FN%7D) |
-| **F1 Score**     | Harmonic mean dari precision dan recall, seimbang untuk data tidak seimbang.                                 | ![F1](https://latex.codecogs.com/svg.image?F1%20Score%20%3D%202%20%5Ccdot%20%5Cfrac%7BPrecision%20%5Ccdot%20Recall%7D%7BPrecision%20&plus;%20Recall%7D) |
-| **ROC-AUC Score**| Mengevaluasi kemampuan model membedakan antara churner dan non-churner, lebih stabil untuk data imbalanced. | - (Luas di bawah kurva ROC; tidak memiliki rumus eksak dalam bentuk fraksi) |
+# Rumus Metrik Evaluasi Model Churn Prediction
 
-- TC merujuk pada True Churn (biasa ditulis sebagai True Positive, TP).
+| Metrik | Penjelasan Singkat | Rumus |
+|------------|-------------------------------------------------------------------------------------|------------------------------------------------------------|
+| **Accuracy** | Proporsi prediksi yang benar terhadap seluruh data. | `Accuracy = (TP + TN) / (TP + TN + FP + FN)` |
+| **Precision** | Dari semua prediksi churn, berapa banyak yang benar-benar churn. | `Precision = TP / (TP + FP)` |
+| **Recall** | Dari semua pelanggan yang churn, berapa banyak yang berhasil diprediksi. | `Recall = TP / (TP + FN)` |
+| **F1 Score** | Harmonic mean dari precision dan recall, seimbang untuk data tidak seimbang. | `F1 Score = 2 × (Precision × Recall) / (Precision + Recall)` |
+| **ROC-AUC Score** | Mengevaluasi kemampuan model membedakan antara churner dan non-churner secara keseluruhan, selain itu jika data churn imbalanced ROC-AUC lebih stabil dibandingkan akurasi. | `AUC = ∫ TPR d(FPR)` dimana TPR = Recall dan FPR = FP/(FP+TN) |
 
-- TN: True Negative, FP: False Positive, FN: False Negative.
+## Keterangan:
+- **TP (True Positive)**: Prediksi churn yang benar (actual churn, predicted churn)
+- **TN (True Negative)**: Prediksi tidak churn yang benar (actual tidak churn, predicted tidak churn)
+- **FP (False Positive)**: Prediksi churn yang salah (actual tidak churn, predicted churn)
+- **FN (False Negative)**: Prediksi tidak churn yang salah (actual churn, predicted tidak churn)
 
-- Untuk ROC-AUC, evaluasinya berbasis grafik kurva ROC, sehingga tidak ada satu rumus fraksional seperti metrik lainnya.
+## Confusion Matrix:
+```
+                 Predicted
+               Tidak Churn  Churn
+Actual Tidak      TN        FP
+       Churn      FN        TP
+```
 
 ---
 
