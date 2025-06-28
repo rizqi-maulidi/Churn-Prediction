@@ -1,4 +1,4 @@
-# Laporan Proyek Machine Learning - Rizqi Maulidi
+# Laporan Proyek Churn Prediction - Rizqi Maulidi
 
 ## Domain Proyek
 
